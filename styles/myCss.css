@@ -1,0 +1,156 @@
+.grid-Group{
+  position:relative;
+  width:100%;
+  color: #fff;
+  height: 800px;
+  background-color:#5F9EA0;
+}
+
+.grid {
+  position: relative;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.item {
+  position: absolute;
+  width: 98%;
+  min-height: 100px;
+  margin: 10px 0 10px 20px;
+  z-index: 1;
+  background-color:#A9A9A9;
+}
+
+.item.muuri-item-positioning {
+  z-index: 2;
+}
+.item.muuri-item-dragging,
+.item.muuri-item-releasing {
+  z-index: 9999;
+}
+.item.muuri-item-dragging {
+  cursor: move;
+}
+.item.muuri-item-hidden {
+  z-index: 0;
+}
+.item.h2 {
+  height: 220px;
+  line-height: 220px;
+}
+.item.w2 {
+  width: 220px;
+}
+.item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.item .item-header{
+  background: none repeat scroll 0 0 #F2F2F2;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 1px solid #dddddd;
+  color: #888888;
+  font-size: 16px;
+  font-weight: bold;
+  height: 25px;
+  line-height: 25px;
+  padding: 5px 10px;
+  cursor:move;
+  position: relative;
+}
+
+.item-header h3{
+  color: #555555;
+  font: bold 14px/28px arial;
+  margin: 0;
+}
+
+.item-header a{
+  margin: 10px 0 0;
+  padding: 1px;
+  top: 0;
+  font-size: 11px;
+  font-weight: normal;
+  position: absolute;
+  text-decoration: none;
+  -moz-user-select: none;
+  float: left;
+  width: 16px;
+  height: 16px;
+}
+
+.item-header .close{
+  margin: 10px 0 0;
+  padding: 1px;
+  top: 0;
+  font-size: 11px;
+  font-weight: normal;
+  position: absolute;
+  text-decoration: none;
+  -moz-user-select: none;
+  float: left;
+  width: 16px;
+  height: 16px;
+}
+
+.item-header .refresh{
+  background: url(../images/action-refresh.png) no-repeat scroll 0 0 transparent;
+  right: 32px;
+}
+
+.item-header .min{
+  background: url(../images/action-min.png) no-repeat scroll 0 0 transparent;
+  right: 16px;
+}
+.item-header .max{
+  background: url(../images/action-max.png) no-repeat scroll 0 0 transparent;
+  right: 16px;
+}
+.item-header .close{
+  background: url(../images/action-close.png) no-repeat scroll 0 0 transparent;
+  right: 0;
+}
+
+.grid-second{
+  padding-bottom: 10px;
+}
+.grid-second .item{
+  width: 200px;
+  height: 35px;
+  min-height: 35px;
+  margin: 10px 0 0 10px;
+  background-color:#DAA520;
+}
+.grid-second .item-content
+{
+  font-size: 18px;
+  font-family: "微软雅黑";
+  line-height: 22px;
+  padding: 5px;
+}
+.grid-second .item-content .content-title{
+  display: inline;
+  cursor: move;
+}
+
+.grid-second .item-content input{
+  width: 100px;
+}
+
+.item-remove {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+
