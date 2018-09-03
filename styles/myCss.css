@@ -189,6 +189,24 @@
   width: 15px;
 }
 
+/* menu */
+#menu{
+  width: 0;
+  height: 125px;
+  overflow: hidden;;
+  box-shadow: 0 1px 1px #888,1px 0 1px #ccc;
+  position: absolute;
+  z-index: 10;
+  background-color: #fff;
+}
+
+.menu{
+  width: 130px;
+  height: 25px;
+  line-height: 25px;
+  padding: 0 10px;
+}
+
 
 
 
