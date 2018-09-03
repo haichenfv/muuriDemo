@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
   //新增字段
   function addItems() {
     //找到选中的grid
+    var selectItem = document.querySelector(".item.select");
     var selectelement = document.querySelector('.item.select .grid-second');
     if(selectelement != null)
     {
@@ -160,7 +161,14 @@ document.addEventListener('DOMContentLoaded', function () {
       //selectegrid.add(newElems);
       if(allgrid[gridid-1] != null)
       {
+        var itemheightpro = selectItem.offsetHeight;
         allgrid[gridid-1].add(newElems);
+        var itemheightchange = selectItem.offsetHeight - itemheightpro;
+        var item = grid0.getItems([selectItem])[0];
+        if(itemheightchange != 0)
+        {
+          item._height += itemheightchange;
+        }
         grid0.layout();
       }
     }
@@ -169,28 +177,37 @@ document.addEventListener('DOMContentLoaded', function () {
   //新增字段2
   function addItems2() {
     //找到选中的grid
-    var selectelement = document.querySelector('.item.select .grid-second');
-    if(selectelement != null)
-    {
-      var gridid = parseInt(selectelement.getAttribute('id').split('-')[1]);
-      var itemElem = document.createElement('div');
-      var itemTemplate = '' +
-        '<div class="item" style="width: 400px">' +
-          '<div class="item-content">'+
-            '<div class="content-title">姓名:</div>'+
-            '<input class="content-Value" type="text" name="">'+
-          '</div>' +
-        '</div>';
+    // var selectelement = document.querySelector('.item.select .grid-second');
+    // if(selectelement != null)
+    // {
+    //   var gridid = parseInt(selectelement.getAttribute('id').split('-')[1]);
+    //   var itemElem = document.createElement('div');
+    //   var itemTemplate = '' +
+    //     '<div class="item" style="width: 400px">' +
+    //       '<div class="item-content">'+
+    //         '<div class="content-title">姓名:</div>'+
+    //         '<input class="content-Value" type="text" name="">'+
+    //       '</div>' +
+    //     '</div>';
+    //   itemElem.innerHTML = itemTemplate;
+    //   if(allgrid[gridid-1] != null)
+    //   {
+    //     allgrid[gridid-1].add([itemElem.firstChild]);
+    //   }
+    // }
 
-      itemElem.innerHTML = itemTemplate;
-      var ret = [];
-      ret.push(itemElem.firstChild);
-      if(allgrid[gridid-1] != null)
-      {
-        allgrid[gridid-1].add(ret);
-        //grid0.layout();
-      }
-    }
+    //模拟修改二级项目
+    var vSelecteditem = document.getElementById("item123");
+    var vSelecteditem2 = document.getElementById("cb_Car");
+    var vLengthpro = vSelecteditem.offsetWidth;
+    var itemTemplateCar = '' +
+     '<label for="cb4"><input id="cb4" type="checkbox" checked="checked" name="Car" value="audi" />bulabulabula</label>';
+    vSelecteditem2.innerHTML += itemTemplateCar;
+    var lengthchanged = vSelecteditem.offsetWidth - vLengthpro;
+    var item = grid2.getItems([vSelecteditem])[0];
+    item._width += lengthchanged;
+    //grid2.remove([v123],{removeElements: true});
+    grid2.layout();
   }
 
 
