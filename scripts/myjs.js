@@ -2,9 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var grid0 = null;
   var grid1 = null;
   var grid2 = null;
-  //var grid3 = null;
-  var allgrid = [];
-  //var docElem = document.documentElement;
+  var allgrid = [];       //保存所有的二级grid
+  var movefromelem = null;
   var gridgroup = document.querySelector('.grid-Group');
   var gridElement0 = document.getElementById('grid-0');
   var gridElement1 = document.getElementById('grid-1');
@@ -19,43 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
       dragEnabled: true,
       dragStartPredicate: {
         handle: '.item-header'
-      },
-      layout:function(items, gridWidth, gridHeight){
-        var layout = {
-        // The layout item slots (left/top coordinates).
-        slots: [],
-        // The layout's total width.
-        width: 0,
-        // The layout's total height.
-        height: 0,
-        // Should Muuri set the grid's width after layout?
-        setWidth: true,
-        // Should Muuri set the grid's height after layout?
-        setHeight: true
-        };
-
-        // Calculate the slots.
-        var item;
-        var m;
-        var x = 0;
-        var y = 0;
-        var w = 0;
-        var h = 0;
-        for (var i = 0; i < items.length; i++) {
-          item = items[i];
-          x = 0;
-          y += h;
-          m = item.getMargin();
-          w = item.getWidth() + m.left + m.right;
-          h = item.getHeight() + m.top + m.bottom;
-          layout.slots.push(x, y);
-        }
-
-        // Calculate the layout's total width and height. 
-        layout.width = x + w;
-        layout.height = y + h;
-
-        return layout;
       }
     });
 
@@ -66,6 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       dragSort: getAllGrids
     });
+    
+    grid1.on('receive',gridreceive);
+    grid1.on('dragReleaseEnd',griddragReleaseEnd);
 
     grid2 = new Muuri(gridElement2, {
       dragEnabled: true,
@@ -75,7 +40,32 @@ document.addEventListener('DOMContentLoaded', function () {
       dragSort: getAllGrids
     });
 
+    grid2.on('receive',gridreceive);
+    grid2.on('dragReleaseEnd',griddragReleaseEnd);
+
     allgrid = [grid1,grid2];
+  }
+
+  //receive grid
+  function gridreceive(data)
+  {
+    movefromelem = elementClosest(data.fromGrid._element,".grid-first .item");
+  }
+
+  //放置好事件
+  function griddragReleaseEnd(item){
+    //放置的grid
+    var elemsecond = elementClosest(item._element,".grid-second");
+    var elemfirst = elementClosest(elemsecond,".grid-first .item");
+    var parentitem = grid0.getItems([elemfirst])[0];
+    parentitem._height = elemfirst.offsetHeight;
+    //来源的grid
+    if(movefromelem != null)
+    {
+      var fromparentitem = grid0.getItems([movefromelem])[0];
+      fromparentitem._height = movefromelem.offsetHeight;
+    }
+    grid0.layout();
   }
 
   //新增字段
@@ -87,14 +77,14 @@ document.addEventListener('DOMContentLoaded', function () {
   //一级grid 删除事件
   gridgroup.addEventListener('click',function(e){
     if(elementMatches(e.target,'.close')){
-      removeItem(e);
+      removefirstItem(e);
     }
   });
 
   //一级grid 选择事件
   gridgroup.addEventListener('click',function(e){
     if(elementMatches(e.target,'.item-header h3')){
-      selectItem(e);
+      selectedfirstItem(e);
     }
   });
 
@@ -128,10 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '</div>';
 
     itemElem.innerHTML = itemTemplate;
-    var ret = [];
-    ret.push(itemElem.firstChild);
-
-    grid0.add(ret);
+    grid0.add([itemElem.firstChild]);
 
     //初始化grid
     var NewgridElement = document.getElementById(gridno);
@@ -145,6 +132,9 @@ document.addEventListener('DOMContentLoaded', function () {
       dragSort: getAllGrids
     });
 
+    varname.on('receive',gridreceive);
+    varname.on('dragReleaseEnd',griddragReleaseEnd);
+
     allgrid.push(varname);
   }
 
@@ -156,11 +146,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if(selectelement != null)
     {
       var gridid = parseInt(selectelement.getAttribute('id').split('-')[1]);
-      var newElems = generateElements(1);
-      //var selectegrid = window[gridid];
-      //selectegrid.add(newElems);
       if(allgrid[gridid-1] != null)
       {
+        var newElems = generateElements(1);
         var itemheightpro = selectItem.offsetHeight;
         allgrid[gridid-1].add(newElems);
         var itemheightchange = selectItem.offsetHeight - itemheightpro;
@@ -210,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
     grid2.layout();
   }
 
-
+  //生成元素
   function generateElements(amount) {
 
     var ret = [];
@@ -245,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   }
 
-  function removeItem(e) {
+  function removefirstItem(e) {
     var elem = elementClosest(e.target, '.item');
     grid0.hide(elem, {onFinish: function (items) {
       var item = items[0];
@@ -253,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }});
   }
 
-  function selectItem(e) {
+  function selectedfirstItem(e) {
 
     grid0.getItems().forEach(function (item, i) {
       item.getElement().classList.remove('select');
@@ -286,42 +274,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
   }
 
-  function grid0layout(items, gridWidth, gridHeight)
-  {
-    var layout = {
-      // The layout item slots (left/top coordinates).
-      slots: [],
-      // The layout's total width.
-      width: 0,
-      // The layout's total height.
-      height: 0,
-      // Should Muuri set the grid's width after layout?
-      setWidth: true,
-      // Should Muuri set the grid's height after layout?
-      setHeight: true
-    };
-  }
-
   window.oncontextmenu=function(e){
-    //取消默认的浏览器自带右键 很重要！！
     e.preventDefault();
 
-    //获取我们自定义的右键菜单
     var menu=document.querySelector("#menu");
-
-    //根据事件对象中鼠标点击的位置，进行定位
     menu.style.left=e.clientX+'px';
     menu.style.top=e.clientY+'px';
-
-    //改变自定义菜单的宽，让它显示出来
     menu.style.width='125px';
   }
 
-  //关闭右键菜单，很简单
   window.onclick=function(e){
-    //用户触发click事件就可以关闭了，因为绑定在window上，按事件冒泡处理，不会影响菜单的功能
-　　document.querySelector('#menu').style.width=0;
+　　  document.querySelector('#menu').style.width=0;
   }
+
+  var vEditGrid = document.getElementById('btnedit');
+  vEditGrid.addEventListener('click',editgrid);
+
+  function editgrid()
+  {
+    centerPopup();
+    $("#backgroundPopup").css({"opacity": "0.7"});
+    $("#backgroundPopup").fadeIn("slow");
+    $("#popupContact").fadeIn("slow");
+  }
+
+  $('#popupContactClose').click(function () {
+    disablePopup();
+  });
+
+  function disablePopup() {
+    $("#backgroundPopup").fadeOut("slow");
+    $("#popupContact").fadeOut("slow");
+  };
+
+  function centerPopup() {
+    //获取系统变量
+    var windowWidth = document.documentElement.clientWidth;
+    var windowHeight = document.documentElement.clientHeight;
+    var popupHeight = $("#popupContact").height();
+    var popupWidth = $("#popupContact").width();
+    //居中设置   
+    $("#popupContact").css({
+      "position": "absolute",
+      "top": windowHeight / 2 - popupHeight / 2,
+      "left": windowWidth / 2 - popupWidth / 2
+    });
+    //以下代码仅在IE6下有效  
+    $("#backgroundPopup").css({"height": windowHeight});
+  };
+
+  $("#backgroundPopup").click(function () {
+    //disablePopup();
+  });
 
   initGrid();
 });

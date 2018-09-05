@@ -191,22 +191,63 @@
 
 /* menu */
 #menu{
-  width: 0;
+  width: 0; /*设置为0 隐藏自定义菜单*/
   height: 125px;
-  overflow: hidden;;
+  overflow: hidden; /*隐藏溢出的元素*/
   box-shadow: 0 1px 1px #888,1px 0 1px #ccc;
-  position: absolute;
+  position: absolute; /*自定义菜单相对与body元素进行定位*/
   z-index: 10;
   background-color: #fff;
 }
-
 .menu{
   width: 130px;
   height: 25px;
   line-height: 25px;
   padding: 0 10px;
+  cursor: pointer;
+}
+.menu:hover{
+  background: #777;
 }
 
+/* popup */
+#backgroundPopup {
+  display: none;
+  position: fixed;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #1d1414;
+  border: 1px solid #cecece;
+  z-index: 10;
+}
 
+#popupContact {
+  display: none;
+  position: fixed;
+  position: absolute;
+  height: 600px;
+  width: 800px;
+  background: #fff;
+  border: 2px solid #cecece;
+  z-index: 11;
+  padding: 12px;
+  font-size: 13px;
+  overflow:auto;
+}
+
+#popupContactClose {
+  font-size: 14px;
+  line-height: 14px;
+  right: 6px;
+  top: 4px;
+  position: absolute;
+  color: #6fa5fd;
+  font-weight: 700;
+  display: block;
+  float:right;
+}
 
 
