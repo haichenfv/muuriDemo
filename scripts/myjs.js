@@ -327,6 +327,24 @@ document.addEventListener('DOMContentLoaded', function () {
     //disablePopup();
   });
 
+  var myitem = document.getElementById('myitem');
+  myitem.addEventListener('dblclick',function(e){
+    editgrid();
+    //加载
+    var title = e.currentTarget.querySelector(".content-title");
+    var contactform = document.getElementById("sonform");
+    var itemTemplate = '' + 
+    '标题 <input type="text" name="" value="'+ title.innerText.replace(":","") +'">' +
+    '<input type="button" id="EditSave" value="保存"/>';
+    contactform.innerHTML = itemTemplate;
+  });
+
+  //保存
+  // var editSave = document.getElementById('EditSave');
+  // editSave.addEventListener('click',function(){
+    
+  // });
+
   initGrid();
 });
 

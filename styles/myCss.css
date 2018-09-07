@@ -2,9 +2,9 @@
   position:relative;
   width:100%;
   color: #fff;
-  height: 800px;
+  min-height: 600px;
   background-color:#5F9EA0;
-  overflow-y: auto;
+  overflow: auto;
   padding-bottom: 10px;
 }
 
@@ -213,27 +213,23 @@
 /* popup */
 #backgroundPopup {
   display: none;
-  position: fixed;
   position: absolute;
-  height: 100%;
   width: 100%;
   top: 0;
   left: 0;
   background: #1d1414;
-  border: 1px solid #cecece;
   z-index: 10;
 }
 
 #popupContact {
   display: none;
-  position: fixed;
   position: absolute;
   height: 600px;
   width: 800px;
   background: #fff;
   border: 2px solid #cecece;
   z-index: 11;
-  padding: 12px;
+  padding: 10px;
   font-size: 13px;
   overflow:auto;
 }
@@ -249,5 +245,6 @@
   display: block;
   float:right;
 }
+
 
 
