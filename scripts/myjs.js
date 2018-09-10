@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  
+
   //一级grid 选择事件
   gridgroup.addEventListener('click',function(e){
     if(elementMatches(e.target,'.item-header h3')){
@@ -102,7 +104,8 @@ document.addEventListener('DOMContentLoaded', function () {
           '<div class="item-header">'+
             '<h3>标题</h3>'+
             '<div class="action">'+
-              '<div class="close"></div>'+
+              '<a href="javascript:void(0);" class="edit" title="编辑"></a>'+
+              '<a href="javascript:void(0);" class="close" title="关闭"></a>'+
             '</div>'+
           '</div>'+
           '<div class="item-content">' + 
@@ -327,23 +330,50 @@ document.addEventListener('DOMContentLoaded', function () {
     //disablePopup();
   });
 
-  var myitem = document.getElementById('myitem');
-  myitem.addEventListener('dblclick',function(e){
+  var elem = null;
+  $('.grid-second .item').dblclick(function(e){
     editgrid();
-    //加载
-    var title = e.currentTarget.querySelector(".content-title");
-    var contactform = document.getElementById("sonform");
-    var itemTemplate = '' + 
-    '标题 <input type="text" name="" value="'+ title.innerText.replace(":","") +'">' +
-    '<input type="button" id="EditSave" value="保存"/>';
-    contactform.innerHTML = itemTemplate;
+    elem = e.currentTarget;
+    showdata(elem,'second');
   });
 
-  //保存
-  // var editSave = document.getElementById('EditSave');
-  // editSave.addEventListener('click',function(){
+  //一级grid 编辑事件
+  $(".item-header .edit").click(function (e) {
+    elem = elementClosest(e.target, '.item-header');
+    editgrid();
+    showdata(elem);
+  });
+
+  function showdata(element,itemno)
+  {
+    if(element == null)
+    {
+      return;
+    }
+    if(itemno == 'first')
+    {
+      var vTitlename = element.querySelector('h3').innerText;
+      $('input#name').attr("value",vTitlename);
+    }
+    else if(itemno == 'second')
+    {
+      var vContenttype = $(element).find('.item-content').attr('contenttype');
+      var vTitlename = element.querySelector('.content-title').innerText.replace(':','');
+      $('input#name').attr("value",vTitlename);
+
+    }
     
-  // });
+  }
+
+  //保存
+  $('#popupContactSave').click(function(){
+    if(elem != null)
+    {
+      elem.querySelector('h3').innerHTML = $('input#name').attr('value');
+    }
+    elem = null;
+    disablePopup();
+  });
 
   initGrid();
 });

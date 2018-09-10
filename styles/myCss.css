@@ -100,7 +100,7 @@
   height: 16px;
 }
 
-.item-header .refresh{
+.item-header .edit{
   background: url(../images/action-refresh.png) no-repeat scroll 0 0 transparent;
   right: 32px;
 }
@@ -244,6 +244,17 @@
   font-weight: 700;
   display: block;
   float:right;
+}
+
+#popupContactSave {
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  bottom: 4px;
+  position: absolute;
+  color: #6fa5fd;
+  font-weight: 700;
+  display: block;
 }
 
 
