@@ -8,79 +8,11 @@
 		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="author" content="Luo Aiqun">
 		<link rel="stylesheet" href="styles/editCss.css">
+		<script src="scripts/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="scripts/editpagejs.js"></script>
 	</head>
 	<body>
 		<div id="myeditcontent">
-			<!-- <form>
-				<table>
-					<tr>
-						<td class="title">控件类型：</td>
-						<td><select>
-							<option>文本框</option>
-							<option>日期</option>
-							<option>下拉框</option>
-						</select></td>
-					</tr>
-					<tr>
-						<td class="title">标题：</td>
-						<td><input type="text" name="firstname">
-						</td>
-					</tr>
-					<tr>
-						<td class="title">是否必填：</td>
-						<td>
-							<input id="IsRequired" type="checkbox" name="cb_IsRequired"/>
-					</tr>
-					<tr>
-						<td class="title">是否数字：</td>
-						<td>
-							<label for="IsNumber_0"><input id="IsNumber_0" type="radio" name="IsNumber"/>是</label>
-							<label for="IsNumber_1"><input id="IsNumber_1" type="radio" name="IsNumber"/>否</label></td>
-						</td>
-					</tr>
-					<tr>
-						<td class="title">日期：</td>
-						<td><input type="date" value="2015-09-24"/></td>
-					</tr>
-					<tr>
-						<td class="title">内容：</td>
-						<td><div style="height: 100px; overflow: auto; margin-top: 5px;">
-							<table>
-								<tr>
-									<th>编号</th>
-									<th>显示名称</th>
-									<th>值名称</th>
-								</tr>
-								<tr>
-									<td>0</td>
-									<td><input type="text" name=""></td>
-									<td><input type="text" name=""></td>
-									<td><input type="button" name="" value="+"><input type="button" name="" value="-"></td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td><input type="text" name=""></td>
-									<td><input type="text" name=""></td>
-									<td><input type="button" name="" value="+"><input type="button" name="" value="-"></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td><input type="text" name=""></td>
-									<td><input type="text" name=""></td>
-									<td><input type="button" name="" value="+"><input type="button" name="" value="-"></td>
-								</tr>
-							</table>
-						</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<input type="button" name="" value="保存">
-						</td>
-					</tr>
-				</table>
-				
-			</form> -->
 			<form id="payment">
 				<fieldset>
 					<legend>段落信息</legend>
@@ -114,31 +46,29 @@
 						</li>
 						<li>
 							<label for="">控件内容：</label>
-							<table>
-								<tr>
-									<th>编号</th>
-									<th>显示名称</th>
-									<th>值名称</th>
-								</tr>
-								<tr>
-									<td>0</td>
-									<td><input type="text" name=""></td>
-									<td><input type="text" name=""></td>
-									<td><input type="button" name="" value="+"><input type="button" name="" value="-"></td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td><input type="text" name=""></td>
-									<td><input type="text" name=""></td>
-									<td><input type="button" name="" value="+"><input type="button" name="" value="-"></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td><input type="text" name=""></td>
-									<td><input type="text" name=""></td>
-									<td><input type="button" name="" value="+"><input type="button" name="" value="-"></td>
-								</tr>
-							</table>
+							<input id="btnadd" class="addrow" type="button" name="" value="+">
+							<div class="content">
+								<table border="1" cellspacing="0">
+									<tr>
+										<td width="15%">编号</td>
+										<td width="40%">显示名称</td>
+										<td width="30%">值名称</td>
+										<td width="15%">操作</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td><input type="text" name=""></td>
+										<td><input type="text" name=""></td>
+										<td><input class="removerow" type="button" name="" value="-"></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td><input type="text" name=""></td>
+										<td><input type="text" name=""></td>
+										<td><input class="removerow" type="button" name="" value="-"></td>
+									</tr>
+								</table>
+							</div>
 						</li>
 					</ol>
 				</fieldset>

@@ -71,19 +71,18 @@ form#payment fieldset fieldset label {
 	width: auto;
 }
 form#payment fieldset fieldset label:hover { cursor: pointer; }
-form#payment input:not([type=radio]), form#payment textarea {
+/*form#payment input:not([type=radio]), form#payment textarea {
 	background: #ffffff;
 	border: #FC3 solid 1px;
 	-webkit-border-radius: 3px;
 	font: italic 13px Georgia, "Times New Roman", Times, serif;
 	outline: none;
 	padding: 5px;
-	width: 200px;
 }
 form#payment input:not([type=submit]):focus, form#payment textarea:focus {
 	background: #eaeaea;
 	border: #F00 solid 1px;
-}
+}*/
 /*form#payment input[type=radio] {
 	float: left;
 	margin-right: 5px;
@@ -93,6 +92,33 @@ form#payment input:not([type=submit]):focus, form#payment textarea:focus {
 	vertical-align: top;
 }
 
-li table th{
+/* table */
+div.content table{
+	border: 1px;
+	width：100%;
 	font-size: 16px;
+	white-space: 1px;
+}
+
+.content table input{
+	width: 100px;
+}
+.content table input[type="button"]{
+	width: 30px;
+	background:#1E90FF;
+	-webkit-border-radius: 3px;
+}
+
+div.content{
+	height: 200px;
+	overflow-y:auto;
+}
+
+td .contentID{
+	text-align: center;
+}
+
+.addrow{
+	float: right;
+	width: 50px;
 }
