@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		var itemTemplate = '' +
 		'<tr>'+
 			'<td>'+ (++vNo)+'</td>'+
-			'<td><input type="text" name=""></td>'+
-			'<td><input type="text" name=""></td>'+
+			'<td><input type="text" name="tb_displayName" onchange="changeValue(this)"></td>'+
+			'<td><input type="text" name="tb_valueName" onchange="changeValue(this)"></td>'+
 			'<td><input class="removerow" type="button" name="" value="-"></td>'+
 		'</tr>';
 		mytable.innerHTML += itemTemplate;
@@ -48,27 +48,44 @@ document.addEventListener('DOMContentLoaded', function () {
 			//parent.removeChild(elem);
 		}
 	});
-
-	function elementClosest(element, selector) {
-
-		if (window.Element && !Element.prototype.closest) {
-			var isMatch = elementMatches(element, selector);
-			while (!isMatch && element && element !== document) {
-				element = element.parentNode;
-				isMatch = element && element !== document && elementMatches(element, selector);
-			}
-			return element && element !== document ? element : null;
-		}
-		else {
-			return element.closest(selector);
-		}
-
-	}
-
-	function elementMatches(element, selector) {
-
-		var p = Element.prototype;
-		return (p.matches || p.matchesSelector || p.webkitMatchesSelector || p.mozMatchesSelector || p.msMatchesSelector || p.oMatchesSelector).call(element, selector);
-
-	}
 })
+
+function elementClosest(element, selector) {
+
+	if (window.Element && !Element.prototype.closest) {
+		var isMatch = elementMatches(element, selector);
+		while (!isMatch && element && element !== document) {
+			element = element.parentNode;
+			isMatch = element && element !== document && elementMatches(element, selector);
+		}
+		return element && element !== document ? element : null;
+	}
+	else {
+		return element.closest(selector);
+	}
+
+}
+
+function elementMatches(element, selector) {
+
+	var p = Element.prototype;
+	return (p.matches || p.matchesSelector || p.webkitMatchesSelector || p.mozMatchesSelector || p.msMatchesSelector || p.oMatchesSelector).call(element, selector);
+
+}
+
+function changeValue(obj){
+	$(obj).attr("value",$(obj).val());
+}
+
+function changeContenttype(obj)
+{
+	var selectedvalue = obj.selectedOptions[0].value;
+	if(selectedvalue == "0")
+	{
+		$("li.li_Content").css("display",'none');
+	}
+	else
+	{
+		$("li.li_Content").css("display",'block');
+	}
+}

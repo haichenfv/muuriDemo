@@ -291,11 +291,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   var vEditGrid = document.getElementById('btnedit');
-  vEditGrid.addEventListener('click',editgrid);
+  vEditGrid.addEventListener('click',ShoweditPage);
 
-  function editgrid()
+  function ShoweditPage()
   {
     centerPopup();
+    document.getElementById("sonform").innerHTML = '<object type="text/html" data="editPage.html" width="100%" height="100%"></object>';
     $("#backgroundPopup").css({"opacity": "0.7"});
     $("#backgroundPopup").fadeIn("slow");
     $("#popupContact").fadeIn("slow");
@@ -331,8 +332,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   var elem = null;
-  $('.grid-second .item').dblclick(function(e){
-    editgrid();
+  //二级gird 双击进入编辑
+  $('.grid-second .content-title').dblclick(function(e){
+    ShoweditPage();
     elem = e.currentTarget;
     showdata(elem,'second');
   });
@@ -340,8 +342,8 @@ document.addEventListener('DOMContentLoaded', function () {
   //一级grid 编辑事件
   $(".item-header .edit").click(function (e) {
     elem = elementClosest(e.target, '.item-header');
-    editgrid();
-    showdata(elem);
+    ShoweditPage();
+    showdata(elem,'first');
   });
 
   function showdata(element,itemno)
@@ -353,13 +355,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if(itemno == 'first')
     {
       var vTitlename = element.querySelector('h3').innerText;
-      $('input#name').attr("value",vTitlename);
+      var v123 = $('#tb_ContentTitle').attr('id');
+      $("li.second").css("display",'none');
     }
     else if(itemno == 'second')
     {
-      var vContenttype = $(element).find('.item-content').attr('contenttype');
-      var vTitlename = element.querySelector('.content-title').innerText.replace(':','');
-      $('input#name').attr("value",vTitlename);
+      // var vContenttype = $(element).find('.item-content').attr('contenttype');
+      // var vTitlename = element.querySelector('.content-title').innerText.replace(':','');
+      // $('input#name').attr("value",vTitlename);
 
     }
     

@@ -17,6 +17,7 @@
 	<body>
 		<header>
 			<div class="actions">
+				<lable>操作:</lable>
 				<button id="btnaddgrid">新增段落</button>
 				<button id="btnadd">新增字段</button>
 				<button id="btnadd2">新增字段2</button>
@@ -26,6 +27,7 @@
 		</header>
 		<br>
 		<section class="grid-Group">
+			<div class="scrollbar"></div>
 			<div id="grid-0" class="grid grid-first">
 				<div class="item">
 					<div class="item-header">
@@ -132,23 +134,10 @@
 		<!--覆盖页面 -->
 	    <div id="popupContact">
 	    	<div id="top">
-	    		<h3>编辑</h3>
+	    		<lable>编辑</lable>
 	    		<input type="button" id="popupContactClose" value="关闭"/>
 	    	</div>
-	        <div id="sonform">
-	        	<form id="payment">
-	        		<fieldset>
-	        			<legend>段落信息</legend>
-	        			<ol>
-	        				<li>
-	        					<label for="name">标题：</label>
-	        					<input id="name" name="name" type="text" placeholder="请输入标题" value="123" required autofocus>
-	        				</li>
-	        			</ol>
-	        		</fieldset>
-
-	        	</form>
-	        </div>
+	        <div id="sonform"></div>
 	        <div id=bottom>
 	        	<input type="button" id="popupContactSave" value="保存"/>
 	        </div>

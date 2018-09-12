@@ -1,12 +1,37 @@
+body{
+  background:#5F9EA0;
+}
 .grid-Group{
   position:relative;
   width:100%;
   color: #fff;
-  min-height: 600px;
-  background-color:#5F9EA0;
+  height: 650px;
   overflow: auto;
   padding-bottom: 10px;
 }
+
+.scrollbar{
+  width: 30px;
+  height: 300px;
+  margin: 0 auto;
+  float: right;
+}
+
+.grid-Group::-webkit-scrollbar {/*滚动条整体样式*/
+  width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.grid-Group::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  background: #535353;
+}
+.grid-Group::-webkit-scrollbar-track {/*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  background: #EDEDED;
+}
+
 
 .grid {
   position: relative;
@@ -225,35 +250,43 @@
   display: none;
   position: absolute;
   height: 600px;
-  width: 800px;
+  width: 500px;
   background: #fff;
   border: 2px solid #cecece;
   z-index: 11;
   padding: 10px;
   font-size: 13px;
-  overflow:auto;
+  overflow:hidden;
 }
-
-#popupContactClose {
-  font-size: 14px;
+#popupContact #top{
+  height: 30px;
+  font-size: 16px;
+  font-weight: 700;
+}
+#popupContact #popupContactClose {
+  position: absolute;
   line-height: 14px;
   right: 6px;
   top: 4px;
-  position: absolute;
   color: #6fa5fd;
-  font-weight: 700;
   display: block;
   float:right;
 }
 
+#popupContact #sonform{
+  height: 550px;
+  overflow:hidden;
+}
+
+#popupContact #bottom{
+  height: 30px;
+  bottom: 4px;
+}
 #popupContactSave {
-  font-size: 14px;
   line-height: 14px;
   text-align: center;
-  bottom: 4px;
   position: absolute;
   color: #6fa5fd;
-  font-weight: 700;
   display: block;
 }
 
