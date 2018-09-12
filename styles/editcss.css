@@ -8,7 +8,7 @@ body {
 	background: #ffffff;
 	color: #111111;
 	font-family: Georgia, "Times New Roman", Times, serif;
-	padding-left: 20px;
+	/*padding-left: 20px;*/
 }
 /*定义付费内容的样式*/
 form#payment {
