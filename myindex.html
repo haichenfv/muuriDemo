@@ -11,8 +11,8 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,500,500italic,700,700italic">
 		<!-- <link rel="stylesheet" href="styles/main.css"> -->
 		<!-- <link rel="stylesheet" href="styles/demo-grid.css"> -->
+		<link rel="stylesheet" href="styles/editCss.css">
 		<link rel="stylesheet" href="styles/myCss.css">
-		<!-- <link rel="stylesheet" href="styles/editCss.css"> -->
 	</head>
 	<body>
 		<header>
@@ -42,14 +42,14 @@
 					<div class="item-content">
 						<div id="grid-1" class="grid grid-second">
 							<div id="myitem" class="item">
-								<div class="item-content" contenttype="textbox">
+								<div class="item-content" contenttype="0" isrequired="0" isNum='0' maxlength="12">
 									<div class="content-title">姓名:</div>
 									<input class="content-Value" type="text" name="">
 								</div>
 							</div>
 
 							<div class="item">
-								<div class="item-content">
+								<div class="item-content" contenttype="0">
 									<div class="content-title">性别:</div>
 									<input class="content-Value" type="text" name="">
 								</div>
@@ -100,7 +100,7 @@
 							</div>
 
 							<div id="item123" class="item">
-								<div class="item-content">
+								<div class="item-content" contenttype="3" isrequired="0" isNum='0' maxlength="12">
 									<div class="content-title">复选:</div>
 									<div id="cb_Car" class="content-checkbox">
 										<label for="cb1"><input id="cb1" type="checkbox" checked="checked" name="Car" value="audi" />奥迪</label> 
@@ -137,7 +137,67 @@
 	    		<lable>编辑</lable>
 	    		<input type="button" id="popupContactClose" value="关闭"/>
 	    	</div>
-	        <div id="sonform"></div>
+	        <div id="sonform">
+	        	<div id="myeditcontent">
+	        		<form id="payment">
+	        			<fieldset>
+	        				<legend>段落信息</legend>
+	        				<ol>
+	        					<li class="second">
+	        						<label for="contenttype">控件类型：</label>
+	        						<select id="contenttype" class="" onchange="changeContenttype(this)" >
+	        							<option value="0">文本框</option>
+	        							<option value="1">下拉框</option>
+	        							<option value="2">单选按钮</option>
+	        							<option value="3">复选框</option>
+	        							<option value="4">日历</option>
+	        						</select>
+	        					</li>
+	        					<li class="first second">
+	        						<label for="name">标题：</label>
+	        						<input id="tb_ContentTitle" name="ContentTitle" type="text" required autofocus>
+	        					</li>
+	        					<li class="second">
+	        						<label>是否必填：</label>
+	        						<label for="rb_IsRequired_0"><input id="rb_IsRequired_0" type="radio" checked="checked" name="IsRequired" value="1" />是</label> 
+	        						<label for="rb_IsRequired_1"><input id="rb_IsRequired_1" type="radio" name="IsRequired" value="0" />否</label>
+	        					</li>
+	        					<li class="second">
+	        						<label>是否数字：</label>
+	        						<label for="rb_IsNumber_0"><input id="rb_IsNumber_0" type="radio" checked="checked" name="IsNumber" value="1" />是</label> 
+	        						<label for="rb_IsNumber_1"><input id="rb_IsNumber_1" type="radio" name="IsNumber" value="0" />否</label>
+	        					</li>
+	        					<li class="second">
+	        						<label for="tb_maxlength">最大长度：</label>
+	        						<input id="tb_maxlength" name="maxlength" type="text" placeholder="请输入最大长度">
+	        					</li>
+	        					<li class="second li_Content">
+	        						<label for="">控件内容：</label>
+	        						<input id="btnadd" class="addrow" type="button" name="" value="+">
+	        						<div class="content">
+	        							<table border="1" cellspacing="0">
+	        								<tr>
+	        									<td width="15%">编号</td>
+	        									<td width="40%">显示名称</td>
+	        									<td width="30%">值名称</td>
+	        									<td width="15%">操作</td>
+	        								</tr>
+	        								<tr>
+	        									<td>1</td>
+	        									<td><input type="text" name="tb_displayName" onchange="changeValue(this)"></td>
+	        									<td><input type="text" name="tb_valueName" onchange="changeValue(this)"></td>
+	        									<td><input class="removerow" type="button" name="" value="-"></td>
+	        								</tr>
+	        							</table>
+	        						</div>
+	        					</li>
+	        				</ol>
+	        			</fieldset>
+
+	        		</form>
+
+	        	</div>
+	        </div>
 	        <div id=bottom>
 	        	<input type="button" id="popupContactSave" value="保存"/>
 	        </div>
@@ -152,5 +212,6 @@
 	    <script src="scripts/vendor/muuri-0.6.3.js"></script>
 		<script src="scripts/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="scripts/myjs.js"></script>
+		<script type="text/javascript" src="scripts/editpagejs.js"></script>
 	</body>
 </html>
