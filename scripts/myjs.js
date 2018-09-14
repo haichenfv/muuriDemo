@@ -296,58 +296,9 @@ function ShoweditPage(){
   $("#backgroundPopup").css({"opacity": "0.7"});
   $("#backgroundPopup").fadeIn("slow");
   $("#popupContact").fadeIn("slow");
-}
 
-function showdata(element,itemno)
-{
-  if(element == null)
-  {
-    return;
-  }
-  if(itemno == 'first')
-  {
-    var vTitlename = element.querySelector('h3').innerText;
-    $('#tb_ContentTitle').attr('value',vTitlename);
-    $("#payment li").css("display",'none');
-    $("#payment li.first").css("display",'block');
-  }
-  else if(itemno == 'second')
-  {
-      var vContenttype = $(element).attr('contenttype');
-      var vTitlename = element.querySelector('.content-title').innerText.replace(':','');
-      var vIsrequired = $(element).attr('isrequired');
-      var vIsnum = $(element).attr('isNum');
-      var vMaxlength = $(element).attr('maxlength');
-      $("#payment li").css("display",'none');
-      $("#payment li.second").css("display",'block');
-      $('#tb_ContentTitle').attr("value",vTitlename);
-
-      $("#contenttype").val(vContenttype);
-      $("#contenttype").change();
-
-      // 0 文本框 1 下拉 2 单选 3 多选 4日历
-      if(vIsrequired != null){
-        var vparm = "#payment li input[name=IsRequired][value='{0}']".format(vIsrequired);
-        $(vparm).attr("checked",'checked');
-      }
-
-      if(vIsnum != null){
-        var vparm1 = "#payment li input[name=IsNumber][value='{0}']".format(vIsnum);
-        $(vparm1).attr("checked",'checked');
-      }
-
-      if(vMaxlength != null){
-        $("#payment li input[name=maxlength]").attr("value",vMaxlength);
-      }
-
-      if(vContenttype == '3')
-      {
-        //获取多个项目
-        var items = $("#payment li input");
-        
-      }
-  }
-    
+  //self.location.reload();
+  //$("#sonform").load(location.href+"#sonform");
 }
 
 //保存编辑页面数据
