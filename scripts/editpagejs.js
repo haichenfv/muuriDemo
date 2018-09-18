@@ -114,6 +114,7 @@ function showdata(element,itemno)
 	}
 	if(itemno == 'first')
 	{
+		$('#myeditcontent').attr("mylevel",'1');
 		var vTitlename = element.querySelector('h3').innerText;
 		$('#tb_ContentTitle').attr('value',vTitlename);
 		$("#payment li").css("display",'none');
@@ -121,6 +122,7 @@ function showdata(element,itemno)
 	}
 	else if(itemno == 'second')
 	{
+		$('#myeditcontent').attr("mylevel",'2');
 		var vContenttype = $(element).attr('contenttype');
 		var vTitlename = element.querySelector('.content-title').innerText.replace(':','');
 		var vIsrequired = $(element).attr('isrequired');

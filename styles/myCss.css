@@ -215,23 +215,28 @@ body{
 }
 
 /* menu */
-#menu{
-  width: 0; /*设置为0 隐藏自定义菜单*/
-  height: 125px;
-  overflow: hidden; /*隐藏溢出的元素*/
+#mymenu{
+  width: 0;
+  height: 80px;
+  overflow: hidden;
   box-shadow: 0 1px 1px #888,1px 0 1px #ccc;
-  position: absolute; /*自定义菜单相对与body元素进行定位*/
+  position: absolute;
   z-index: 10;
   background-color: #fff;
+  padding: 3px 0;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: '微软雅黑';
 }
-.menu{
-  width: 130px;
+.menuitem{
+  list-style: none;
+  width: 60px;
   height: 25px;
   line-height: 25px;
-  padding: 0 10px;
   cursor: pointer;
+  overflow: hidden;
 }
-.menu:hover{
+.menuitem:hover{
   background: #777;
 }
 

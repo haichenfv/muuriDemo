@@ -101,6 +101,8 @@ function addGridItems(){
   varname.on('dragReleaseEnd',griddragReleaseEnd);
 
   allgrid.push(varname);
+
+  freshbinding();
 }
 
 //新增字段
@@ -124,6 +126,8 @@ function addItems() {
       }
       grid0.layout();
     }
+
+    freshbinding();
   }
 }
 
@@ -234,8 +238,8 @@ function generateElement() {
   var itemElem = document.createElement('div');
   var classNames = 'item';
   var itemTemplate = '' +
-  '<div class="' + classNames +'" >' +
-  '<div class="item-content">' +
+  '<div class="' + classNames +'">' +
+  '<div class="item-content" contenttype="0">' +
   '<div class="content-title">新增字段: </div>' +
   '<input class="content-Value" type="text" name="">' +
   '</div>' +
@@ -305,10 +309,119 @@ function ShoweditPage(){
 $('#popupContactSave').click(function(){
   if(elem != null)
   {
-    elem.querySelector('h3').innerHTML = $('input#name').attr('value');
+    var vLevel = $('#myeditcontent').attr("mylevel");
+    if( vLevel == '1') //以及grid编辑
+    {
+      var vTitlename = $('#tb_ContentTitle').attr('value');
+      var result = CheckValue(vTitlename,'标题名称');
+      if(!result){
+        return;
+      } 
+      $(elem).find('h3')[0].innerHTML = vTitlename; //elem.querySelector('h3');
+    }
+    else if(vLevel == '2')
+    {
+      var vContenttype = $('#contenttype option:selected').val();
+      var vTitlename = $('#tb_ContentTitle').attr('value');
+      var vIsRequired = $('#payment li input[name=IsRequired][checked=checked]').attr('value');
+      var vIsnum = $('#payment li input[name=IsNumber][checked=checked]').attr('value');
+      var vMaxlength = $("#payment li input[name=maxlength]").attr("value");
+      var itemTemplate;
+      var Iscontinueedit = false;
+      var myoptions = '';
+      var vOptions = [];
+      if(vContenttype =='1'|| vContenttype == '2'||vContenttype =='3')
+      {
+        $('.content table tr').not('.head').map(function(item,index,array){
+          var content = new Object();
+          content.index = index.firstChild.innerText;
+          content.displayvalue = $($(index).find('input[name=tb_displayName]')[0]).attr('value');
+          content.keyvalue = $($(index).find('input[name=tb_valueName]')[0]).attr('value');
+          vOptions.push(content);
+        });
+      }
+      switch(vContenttype)
+      {
+        case '0':
+        itemTemplate = ''+
+        '<div class="item-content" contenttype="0" isrequired="'+ vIsRequired +'" isNum="'+vIsnum +'" maxlength="'+vMaxlength+'">'+
+        '<div class="content-title">'+ vTitlename +': </div>' +
+        '<input class="content-Value" type="text" name="">' +
+        '</div>';
+        break;
+        case '1':
+        vOptions.map(function(item){
+          if(item.displayvalue == '' || item.keyvalue == '')
+          {
+            alert('{0}行数据不能为空，请检查！'.format(item.index));
+            Iscontinueedit = true;
+            return;
+          }
+          myoptions += '<option value="{0}">{1}</option>'.format(item.keyvalue,item.displayvalue);
+        });
+
+        itemTemplate = ''+
+        '<div class="item-content" contenttype="1" isrequired="'+ vIsRequired +'" isNum="'+vIsnum +'" maxlength="'+vMaxlength+'">'+
+        '<div class="content-title">'+ vTitlename +': </div>'+
+        '<select class="content-Value">'+myoptions+
+        '</select>'+
+        '</div>';
+        break;
+        case '2':
+        var radioname = 'rb_'+ uuid(8,16);
+        vOptions.map(function(item){
+          if(item.displayvalue == '' || item.keyvalue == '')
+          {
+            alert('{0}行数据不能为空，请检查！'.format(item.index));
+            Iscontinueedit = true;
+            return;
+          }
+          var radiono = radioname + '_{0}'.format(item.index);
+          myoptions += '<label for="{0}"><input id="{0}" type="radio" name="{1}" value="{2}" />{3}</label>'.format(radiono,radioname,item.keyvalue,item.displayvalue);
+        });
+
+        itemTemplate = ''+
+        '<div class="item-content" contenttype="2" isrequired="'+ vIsRequired +'" isNum="'+vIsnum +'" maxlength="'+vMaxlength+'">'+
+        '<div class="content-title">'+ vTitlename +': </div>'+
+        '<div class="content-radio">'+ myoptions +
+        '</div>'+
+        '</div>';
+        break;
+        case '3':
+        var cbname = 'cb_'+ uuid(8,16);
+        vOptions.map(function(item){
+          if(item.displayvalue == '' || item.keyvalue == '')
+          {
+            alert('{0}行数据不能为空，请检查！'.format(item.index));
+            Iscontinueedit = true;
+            return;
+          }
+          var cbno = cbname + '_{0}'.format(item.index);
+          myoptions += '<label for="{0}"><input id="{0}" type="checkbox" name="{1}" value="{2}" />{3}</label>'.format(cbno,cbname,item.keyvalue,item.displayvalue);
+        });
+
+        itemTemplate = ''+
+        '<div class="item-content" contenttype="3" isrequired="'+ vIsRequired +'" isNum="'+vIsnum +'" maxlength="'+vMaxlength+'">'+
+        '<div class="content-title">'+ vTitlename +': </div>'+
+        '<div id="" class="content-checkbox">'+myoptions+
+        '</div>'+
+        '</div>';
+        break;
+        case '4':
+        break;
+
+
+      }
+
+      elem.outerHTML = itemTemplate;
+    }
   }
-  elem = null;
-  disablePopup();
+  if(!Iscontinueedit)
+  {
+    elem = null;
+    disablePopup();
+    freshbinding();
+  }
 });
 
 //
@@ -316,15 +429,42 @@ $('#popupContactSave').click(function(){
 //
 window.oncontextmenu = function(e){
   e.preventDefault();
+}
+window.onclick = menuclose;
+function menuclose()
+{
+  document.querySelector('#mymenu').style.width=0;
+}
+var currentelement = null;
+$('.grid-second .item-content').mousedown(function(e){
+  if(e.which == 3){
+    var menu=document.querySelector("#mymenu");
+    menu.style.left=e.clientX+'px';
+    menu.style.top=e.clientY+'px';
+    menu.style.width='60px';
+    currentelement = elementClosest(e.target, '.item-content');
+  }
+});
 
-  var menu=document.querySelector("#menu");
-  menu.style.left=e.clientX+'px';
-  menu.style.top=e.clientY+'px';
-  menu.style.width='125px';
-}
-window.onclick = function(e){
-  document.querySelector('#menu').style.width=0;
-}
+$('.menuitem').click(function(e){
+  if(currentelement != null)
+  {
+    var vAction = $(this).attr('data-item');
+    if( vAction == '0'){
+      alert('您选择查看信息！');
+    }
+    else if( vAction == '1'){
+      ShoweditPage();
+      showdata(currentelement,'second');
+    }
+    else if( vAction == '2'){
+      alert('您选择删除信息！');
+    }
+  }
+  menuclose();
+});
+
+
 $('#popupContactClose').click(function () {
   disablePopup();
 });
@@ -369,5 +509,71 @@ String.prototype.format = function() {
  }
 }
 
+// var options = {items:[
+//   {text: '查看', href: '#'},
+//   {text: '编辑', onclick: function(e) {
+//     var v123 = '123';
+//     alert("你点击了第二个链接")}},
+//   {divider: true},
+//   {text: '删除', href:'#'}]};
+// $('.grid-second .item-content .content-title').contextify(options);
 
+function CheckValue(contentvalue,titlename){
+  if(contentvalue == null || contentvalue == '')
+  {
+    alert('{0} 为空！'.format(titlename));
+    return false;
+  }
+  return true;
+}
+
+function freshbinding()
+{
+  //绑定事件
+  $('.grid-second .item-content').mousedown(function(e){
+    if(e.which == 3){
+      var menu=document.querySelector("#mymenu");
+      menu.style.left=e.clientX+'px';
+      menu.style.top=e.clientY+'px';
+      menu.style.width='60px';
+      currentelement = elementClosest(e.target, '.item-content');
+    }
+  });
+
+  //二级gird 双击进入编辑
+  $('.grid-second .content-title').dblclick(function(e){
+    ShoweditPage();
+    elem = elementClosest(e.target, '.item-content');
+    showdata(elem,'second');
+  });
+}
+
+function uuid(len, radix) {
+    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+    var uuid = [], i;
+    radix = radix || chars.length;
+ 
+    if (len) {
+      // Compact form
+      for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];
+    } else {
+      // rfc4122, version 4 form
+      var r;
+ 
+      // rfc4122 requires these characters
+      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+      uuid[14] = '4';
+ 
+      // Fill in random data.  At i==19 set the high bits of clock sequence as
+      // per rfc4122, sec. 4.1.5
+      for (i = 0; i < 36; i++) {
+        if (!uuid[i]) {
+          r = 0 | Math.random()*16;
+          uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+        }
+      }
+    }
+ 
+    return uuid.join('');
+}
 

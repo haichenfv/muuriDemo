@@ -11,8 +11,10 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,500,500italic,700,700italic">
 		<!-- <link rel="stylesheet" href="styles/main.css"> -->
 		<!-- <link rel="stylesheet" href="styles/demo-grid.css"> -->
+		<!-- <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css" /> -->
 		<link rel="stylesheet" href="styles/editCss.css">
 		<link rel="stylesheet" href="styles/myCss.css">
+
 	</head>
 	<body>
 		<header>
@@ -65,7 +67,7 @@
 							<div class="item">
 								<div class="item-content" contenttype="1"isrequired="0">
 									<div class="content-title">下拉框:</div>
-									<select class="">
+									<select class="content-Value">
 										<option value="0">123</option>
 										<option value="1">456</option>
 									</select>
@@ -125,10 +127,10 @@
 			</div>
 		</section>
 
-		<div id="menu">
-			<div class="menu">功能1</div>
-			<div class="menu">功能2</div>
-			<div class="menu">功能3</div>
+		<div id="mymenu">
+			<li class="menuitem" data-item='0'>&nbsp;查看</li>
+			<li class="menuitem" data-item='1'>&nbsp;编辑</li>
+			<li class="menuitem" data-item='2'>&nbsp;删除</li>
 		</div>
 
 		<!--覆盖页面 -->
@@ -205,7 +207,9 @@
 	    <script src="scripts/vendor/hammer-2.0.8.min.js"></script>
 	    <script src="scripts/vendor/muuri-0.6.3.js"></script>
 		<script src="scripts/jquery-1.7.1.min.js"></script>
+		<!-- <script src="scripts/jquery.contextify.js"></script> -->
 		<script type="text/javascript" src="scripts/myjs.js"></script>
 		<script type="text/javascript" src="scripts/editpagejs.js"></script>
+
 	</body>
 </html>
