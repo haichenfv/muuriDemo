@@ -79,14 +79,34 @@ function changeValue(obj){
 function changeContenttype(obj)
 {
 	var selectedvalue = obj.selectedOptions[0].value;
-	if(selectedvalue == "0")
-	{
-		$("li.li_Content").css("display",'none');
+	if(selectedvalue == "0"){
+		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.contentrequired").css("display",'block');
+		$("li.contentnumber").css("display",'block');
+		$("li.contentmaxlength").css("display",'block');
 	}
-	else
-	{
+	else if(selectedvalue == "1"){
+		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.contentrequired").css("display",'block');
 		$("li.li_Content").css("display",'block');
 	}
+	else if(selectedvalue == "2"){
+		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.li_Content").css("display",'block');
+
+	}
+	else if(selectedvalue == "3"){
+		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.contentrequired").css("display",'block');
+		$("li.li_Content").css("display",'block');
+
+	}
+	else if(selectedvalue == "4"){
+		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.datetype").css("display",'block');
+		$("li.contentrequired").css("display",'block');
+	}
+
 }
 
 function init()
@@ -115,6 +135,7 @@ function showdata(element,itemno)
 	if(itemno == 'first')
 	{
 		$('#myeditcontent').attr("mylevel",'1');
+		$('legend')[0].innerHTML = '段落信息';
 		var vTitlename = element.querySelector('h3').innerText;
 		$('#tb_ContentTitle').attr('value',vTitlename);
 		$("#payment li").css("display",'none');
@@ -123,6 +144,7 @@ function showdata(element,itemno)
 	else if(itemno == 'second')
 	{
 		$('#myeditcontent').attr("mylevel",'2');
+		$('legend')[0].innerHTML = '字段信息';
 		var vContenttype = $(element).attr('contenttype');
 		var vTitlename = element.querySelector('.content-title').innerText.replace(':','');
 		var vIsrequired = $(element).attr('isrequired');

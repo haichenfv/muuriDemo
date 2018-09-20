@@ -24,8 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //按钮操作
 $('#btnadd').click(addItems);
-$('#btnadd2').click(addItems2);
-$('#btnedit').click(ShoweditPage);
 $('#btnaddgrid').click(addGridItems);
 
 //一级grid
@@ -128,6 +126,9 @@ function addItems() {
     }
 
     freshbinding();
+  }
+  else{
+    alert('请选定需要添加的段落！');
   }
 }
 
@@ -260,6 +261,31 @@ function removefirstItem(e) {
     var item = items[0];
     grid0.remove(item, {removeElements: true});
   }});
+}
+
+function removesecondItem(elem) {
+  var selectedelem = elementClosest(elem, '.item');
+  var selectedgrid = elementClosest(elem, '.grid-second');
+  var selectedfirstelem = elementClosest(selectedgrid, '.item');
+  if(selectedgrid != null)
+  {
+    var gridid = parseInt(selectedgrid.getAttribute('id').split('-')[1]);
+    var vGrid = allgrid[gridid-1];
+    if( vGrid != null){
+      var itemheightpro = selectedfirstelem.offsetHeight;
+      vGrid.hide(selectedelem, {onFinish: function (items) {
+        var item = items[0];
+        vGrid.remove(item, {removeElements: true});
+      }});
+      var itemheightchange = selectedfirstelem.offsetHeight - itemheightpro;
+      var item = grid0.getItems([selectedfirstelem])[0];
+      if(itemheightchange != 0)
+      {
+        item._height += itemheightchange;
+      }
+      grid0.layout();
+    }
+  }
 }
 
 function selectedfirstItem(e) {
@@ -408,9 +434,13 @@ $('#popupContactSave').click(function(){
         '</div>';
         break;
         case '4':
+        var vTimetype = $('#datetype option:selected').val();
+        itemTemplate = ''+
+        '<div class="item-content" contenttype="4" isrequired="'+ vIsRequired +'">'+
+        '<div class="content-title">'+ vTitlename +': </div>'+
+        '<input class="content-Date" type="'+ vTimetype +'" value="2015-09-24"/>'+
+        '</div>';
         break;
-
-
       }
 
       elem.outerHTML = itemTemplate;
@@ -458,7 +488,9 @@ $('.menuitem').click(function(e){
       showdata(currentelement,'second');
     }
     else if( vAction == '2'){
-      alert('您选择删除信息！');
+      if (confirm("是否要删除当前选中字段!") == true){
+        removesecondItem(currentelement)
+      }
     }
   }
   menuclose();

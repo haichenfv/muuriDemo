@@ -22,9 +22,9 @@
 				<lable>操作:</lable>
 				<button id="btnaddgrid">新增段落</button>
 				<button id="btnadd">新增字段</button>
-				<button id="btnadd2">新增字段2</button>
+				<!-- <button id="btnadd2">新增字段2</button>
 				<button id="btndelete">删除</button>
-				<button id="btnedit">编辑</button>
+				<button id="btnedit">编辑</button> -->
 			</div>
 		</header>
 		<br>
@@ -74,10 +74,10 @@
 								</div>
 							</div>
 
-							<div class="item" style="width: 400px">
-								<div class="item-content">
-									<div class="content-title">大字段:</div>
-									<input class="content-Value" type="text" name="">
+							<div class="item">
+								<div class="item-content" contenttype="4" isrequired="1">
+									<div class="content-title">时间:</div>
+									<input class="content-Date" type="datetime-local"/>
 								</div>
 							</div>
 						</div>
@@ -145,7 +145,7 @@
 	        			<fieldset>
 	        				<legend>段落信息</legend>
 	        				<ol>
-	        					<li class="second">
+	        					<li class="second contenttype">
 	        						<label for="contenttype">控件类型：</label>
 	        						<select id="contenttype" class="" onchange="changeContenttype(this)" >
 	        							<option value="0">文本框</option>
@@ -155,21 +155,29 @@
 	        							<option value="4">日历</option>
 	        						</select>
 	        					</li>
-	        					<li class="first second">
+	        					<li class="first second contentTitle">
 	        						<label for="name">标题：</label>
 	        						<input id="tb_ContentTitle" name="ContentTitle" type="text" required autofocus>
 	        					</li>
-	        					<li class="second">
+	        					<li class="second contentrequired">
 	        						<label>是否必填：</label>
 	        						<label for="rb_IsRequired_0"><input id="rb_IsRequired_0" type="radio" checked="checked" name="IsRequired" value="1" />是</label> 
 	        						<label for="rb_IsRequired_1"><input id="rb_IsRequired_1" type="radio" name="IsRequired" value="0" />否</label>
 	        					</li>
-	        					<li class="second">
+	        					<li class="second datetype">
+	        						<label for="datetype">时间类型：</label>
+	        						<select id="datetype">
+	        							<option value="date">日期</option>
+	        							<option value="time">时间</option>
+	        							<option value="datetime">日期+时间</option>
+	        						</select>
+	        					</li>
+	        					<li class="second contentnumber">
 	        						<label>是否数字：</label>
 	        						<label for="rb_IsNumber_0"><input id="rb_IsNumber_0" type="radio" checked="checked" name="IsNumber" value="1" />是</label> 
 	        						<label for="rb_IsNumber_1"><input id="rb_IsNumber_1" type="radio" name="IsNumber" value="0" />否</label>
 	        					</li>
-	        					<li class="second">
+	        					<li class="second contentmaxlength">
 	        						<label for="tb_maxlength">最大长度：</label>
 	        						<input id="tb_maxlength" name="maxlength" type="text" placeholder="请输入最大长度">
 	        					</li>

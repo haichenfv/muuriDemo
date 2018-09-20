@@ -31,10 +31,10 @@ form#payment legend {
 	padding-bottom: 10px;
 	text-shadow: 0 1px 1px #c0d576;
 }
-form#payment > fieldset > legend:before {
+/*form#payment > fieldset > legend:before {
 	content: "Step " counter(fieldsets) ": ";
 	counter-increment: fieldsets;
-}
+}*/
 form#payment fieldset fieldset legend {
 	color: #111111;
 	font-size: 13px;

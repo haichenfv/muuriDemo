@@ -197,7 +197,7 @@ body{
   display: inline;
   cursor: move;
 }
-.grid-second .item-content input,select{
+.grid-second .item-content .content-Value{
   width: 100px;
   font-size: 16px;
   font-family: "微软雅黑";
@@ -213,7 +213,19 @@ body{
 .item-content .content-checkbox input{
   width: 15px;
 }
-
+.item-content .content-Date{
+  font-size: 16px;
+  font-family: "微软雅黑";
+}
+.item-content .content-Date[type=time]{
+  width: 80px;
+}
+.item-content .content-Date[type=date]{
+  width: 150px;
+}
+.item-content .content-Date[type=datetime-local]{
+  width: 200px;
+}
 /* menu */
 #mymenu{
   width: 0;
