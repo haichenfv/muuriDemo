@@ -194,6 +194,11 @@ function showdata(element,itemno)
         		items.push(content);
         	}
         }
+        else if(vContenttype == '4')
+        {
+      		var vDateType = $($(element).find('input')[0]).attr("type");
+      		$("#datetype").val(vDateType);
+        }
 
 	    if(items.length > 0 ){
 	    	var mytable = document.querySelector('.content table tbody');

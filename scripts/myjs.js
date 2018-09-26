@@ -72,7 +72,7 @@ function addGridItems(){
   '<div id="'+ gridno +'"'+' class="grid grid-second">' +
   '<div class="item">'+
   '<div class="item-content">'+
-  '<div class="content-title">新增字段:</div>'+
+  '<div class="content-title">新增字段: </div>'+
   '<input class="content-Value" type="text" name="">'+
   '</div>'+
   '</div>'+
