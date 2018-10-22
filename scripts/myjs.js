@@ -335,6 +335,10 @@ function ShoweditPage(){
 $('#popupContactSave').click(function(){
   if(elem != null)
   {
+    //get selected grid
+    var selectelement = elementClosest(elem, '.grid-second');
+    var selectItem = elementClosest(elem, '.item');
+    var itemWidthpro = selectItem.offsetWidth;
     var vLevel = $('#myeditcontent').attr("mylevel");
     if( vLevel == '1') //以及grid编辑
     {
@@ -444,6 +448,18 @@ $('#popupContactSave').click(function(){
       }
 
       elem.outerHTML = itemTemplate;
+    }
+  }
+  if(selectelement != null){      
+    var gridid = parseInt(selectelement.getAttribute('id').split('-')[1]);
+    if(allgrid[gridid-1] != null){
+      var itemWidthchange = selectItem.offsetWidth - itemWidthpro;
+      var item = allgrid[gridid-1].getItems([selectItem])[0];
+      if(itemWidthchange != 0)
+      {
+        item._width += itemWidthchange;
+      }
+      allgrid[gridid-1].layout();
     }
   }
   if(!Iscontinueedit)

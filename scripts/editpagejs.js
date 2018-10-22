@@ -81,28 +81,33 @@ function changeContenttype(obj)
 	var selectedvalue = obj.selectedOptions[0].value;
 	if(selectedvalue == "0"){
 		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.contentTitle").css("display","block");
 		$("li.contentrequired").css("display",'block');
 		$("li.contentnumber").css("display",'block');
 		$("li.contentmaxlength").css("display",'block');
 	}
 	else if(selectedvalue == "1"){
 		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.contentTitle").css("display","block");
 		$("li.contentrequired").css("display",'block');
 		$("li.li_Content").css("display",'block');
 	}
 	else if(selectedvalue == "2"){
 		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.contentTitle").css("display","block");
 		$("li.li_Content").css("display",'block');
 
 	}
 	else if(selectedvalue == "3"){
 		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.contentTitle").css("display","block");
 		$("li.contentrequired").css("display",'block');
 		$("li.li_Content").css("display",'block');
 
 	}
 	else if(selectedvalue == "4"){
 		$("#payment li").not('.contenttype').css("display",'none');
+		$("li.contentTitle").css("display","block");
 		$("li.datetype").css("display",'block');
 		$("li.contentrequired").css("display",'block');
 	}
