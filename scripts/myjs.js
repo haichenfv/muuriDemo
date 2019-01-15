@@ -340,9 +340,10 @@ $('#popupContactSave').click(function(){
     var selectItem = elementClosest(elem, '.item');
     var itemWidthpro = selectItem.offsetWidth;
     var vLevel = $('#myeditcontent').attr("mylevel");
+    var vTitlename = $('#tb_ContentTitle').attr('value');
     if( vLevel == '1') //以及grid编辑
     {
-      var vTitlename = $('#tb_ContentTitle').attr('value');
+      
       var result = CheckValue(vTitlename,'标题名称');
       if(!result){
         return;
@@ -351,8 +352,11 @@ $('#popupContactSave').click(function(){
     }
     else if(vLevel == '2')
     {
+      if(vTitlename != "")
+      {
+        vTitlename += ": ";
+      }
       var vContenttype = $('#contenttype option:selected').val();
-      var vTitlename = $('#tb_ContentTitle').attr('value');
       var vIsRequired = $('#payment li input[name=IsRequired][checked=checked]').attr('value');
       var vIsnum = $('#payment li input[name=IsNumber][checked=checked]').attr('value');
       var vMaxlength = $("#payment li input[name=maxlength]").attr("value");
@@ -375,7 +379,7 @@ $('#popupContactSave').click(function(){
         case '0':
         itemTemplate = ''+
         '<div class="item-content" contenttype="0" isrequired="'+ vIsRequired +'" isNum="'+vIsnum +'" maxlength="'+vMaxlength+'">'+
-        '<div class="content-title">'+ vTitlename +': </div>' +
+        '<div class="content-title">'+ vTitlename +'</div>' +
         '<input class="content-Value" type="text" name="">' +
         '</div>';
         break;
@@ -392,7 +396,7 @@ $('#popupContactSave').click(function(){
 
         itemTemplate = ''+
         '<div class="item-content" contenttype="1" isrequired="'+ vIsRequired +'" isNum="'+vIsnum +'" maxlength="'+vMaxlength+'">'+
-        '<div class="content-title">'+ vTitlename +': </div>'+
+        '<div class="content-title">'+ vTitlename +'</div>'+
         '<select class="content-Value">'+myoptions+
         '</select>'+
         '</div>';
@@ -412,7 +416,7 @@ $('#popupContactSave').click(function(){
 
         itemTemplate = ''+
         '<div class="item-content" contenttype="2" isrequired="'+ vIsRequired +'" isNum="'+vIsnum +'" maxlength="'+vMaxlength+'">'+
-        '<div class="content-title">'+ vTitlename +': </div>'+
+        '<div class="content-title">'+ vTitlename +'</div>'+
         '<div class="content-radio">'+ myoptions +
         '</div>'+
         '</div>';
@@ -432,7 +436,7 @@ $('#popupContactSave').click(function(){
 
         itemTemplate = ''+
         '<div class="item-content" contenttype="3" isrequired="'+ vIsRequired +'" isNum="'+vIsnum +'" maxlength="'+vMaxlength+'">'+
-        '<div class="content-title">'+ vTitlename +': </div>'+
+        '<div class="content-title">'+ vTitlename +'</div>'+
         '<div id="" class="content-checkbox">'+myoptions+
         '</div>'+
         '</div>';
@@ -441,7 +445,7 @@ $('#popupContactSave').click(function(){
         var vTimetype = $('#datetype option:selected').val();
         itemTemplate = ''+
         '<div class="item-content" contenttype="4" isrequired="'+ vIsRequired +'">'+
-        '<div class="content-title">'+ vTitlename +': </div>'+
+        '<div class="content-title">'+ vTitlename +'</div>'+
         '<input class="content-Date" type="'+ vTimetype +'" value="2015-09-24"/>'+
         '</div>';
         break;
@@ -501,6 +505,7 @@ $('.menuitem').click(function(e){
     }
     else if( vAction == '1'){
       ShoweditPage();
+      elem = currentelement;
       showdata(currentelement,'second');
     }
     else if( vAction == '2'){

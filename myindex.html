@@ -181,6 +181,11 @@
 	        						<label for="tb_maxlength">最大长度：</label>
 	        						<input id="tb_maxlength" name="maxlength" type="text" placeholder="请输入最大长度">
 	        					</li>
+	        					<li class="second contentdatafrom">
+	        						<label>数据来源：</label>
+	        						<label for="rb_datafrom_0"><input id="rb_datafrom_0" type="radio" checked="checked" name="datafrom" value="0" onchange="datafromSelected(this)" />自定义</label>
+	        						<label for="rb_datafrom_1"><input id="rb_datafrom_1" type="radio" name="datafrom" value="1" onchange="datafromSelected(this)" />数据库</label>
+	        					</li>
 	        					<li class="second li_Content">
 	        						<label for="">控件内容：</label>
 	        						<input id="btnaddContent" class="addrow" type="button" name="" value="+">
@@ -194,6 +199,13 @@
 	        								</tr>
 	        							</table>
 	        						</div>
+	        					</li>
+	        					<li class="second li_Contentfromdatabase">
+	        						<label for="">数据配置：</label><br>
+	        						表名：<input type="text" name="tablename"><br>
+	        						显示列名称：<input type="text" name="displaycolname"><br>
+	        						值列名称：<input type="text" name="valuecolname"><br>
+	        						执行语句：<br><textarea name="otherparms" cols="50" rows="6" placeholder="请输入条件语句，如 select a.a1,a.a2 form XXX a where a.name like '%XX%'" style="resize: none;"></textarea><br>
 	        					</li>
 	        				</ol>
 	        			</fieldset>

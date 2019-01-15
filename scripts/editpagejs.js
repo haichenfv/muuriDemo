@@ -79,32 +79,40 @@ function changeValue(obj){
 function changeContenttype(obj)
 {
 	var selectedvalue = obj.selectedOptions[0].value;
-	if(selectedvalue == "0"){
+	//文本框
+	if(selectedvalue == "0"){         
 		$("#payment li").not('.contenttype').css("display",'none');
 		$("li.contentTitle").css("display","block");
 		$("li.contentrequired").css("display",'block');
 		$("li.contentnumber").css("display",'block');
 		$("li.contentmaxlength").css("display",'block');
 	}
+	//下拉框
 	else if(selectedvalue == "1"){
 		$("#payment li").not('.contenttype').css("display",'none');
 		$("li.contentTitle").css("display","block");
 		$("li.contentrequired").css("display",'block');
+		$("li.contentdatafrom").css("display",'block');
 		$("li.li_Content").css("display",'block');
 	}
+	//单选按钮
 	else if(selectedvalue == "2"){
 		$("#payment li").not('.contenttype').css("display",'none');
 		$("li.contentTitle").css("display","block");
+		$("li.contentdatafrom").css("display",'block');
 		$("li.li_Content").css("display",'block');
 
 	}
+	//复选框
 	else if(selectedvalue == "3"){
 		$("#payment li").not('.contenttype').css("display",'none');
 		$("li.contentTitle").css("display","block");
 		$("li.contentrequired").css("display",'block');
+		$("li.contentdatafrom").css("display",'block');
 		$("li.li_Content").css("display",'block');
 
 	}
+	//日历
 	else if(selectedvalue == "4"){
 		$("#payment li").not('.contenttype').css("display",'none');
 		$("li.contentTitle").css("display","block");
@@ -112,6 +120,20 @@ function changeContenttype(obj)
 		$("li.contentrequired").css("display",'block');
 	}
 
+}
+
+function datafromSelected(obj)
+{
+	if(obj.value == '0')
+	{
+		$("li.li_Content").css("display",'block');
+		$("li.li_Contentfromdatabase").css("display",'none');
+	}
+	else
+	{
+		$("li.li_Content").css("display",'none');
+		$("li.li_Contentfromdatabase").css("display",'block');
+	}
 }
 
 function init()
